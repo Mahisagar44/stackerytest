@@ -1,0 +1,126 @@
+version: 0.2
+
+#env:
+  #variables:
+     # key: "value"
+     # key: "value"
+  #parameter-store:
+     # key: "value"
+     # key: "value"
+  #secrets-manager:
+  #    test: arn:aws:secretsmanager:us-east-1:428819760020:secret:stackeryusername-BcJgjT
+     # key: secret-id:json-key:version-stage:version-id
+  #exported-variables:
+     # - variable
+     # - variable
+  #git-credential-helper: yes
+#batch:
+  #fast-fail: true
+  #build-list:
+  #build-matrix:
+  #build-graph:
+phases:
+  install:
+    #If you use the Ubuntu standard image 2.0 or later, you must specify runtime-versions.
+    #If you specify runtime-versions and use an image other than Ubuntu standard image 2.0, the build fails.
+    runtime-versions:
+        nodejs: 10
+      # name: version
+      # name: version
+    commands:
+      - |
+        if echo $REQUIRED_RUNTIMES | grep -sw python2.7; then
+          echo installing python 2.7
+          apt-get update
+          apt-get --assume-yes install python2.7 python-pip
+        fi
+      # Install Stackery CLI
+      - |
+          if [ "$STACKERY_CLI_VERSION" != "" ]; then
+            echo getting cli version $STACKERY_CLI_VERSION
+            echo $STACKERY_CLI_VERSION | grep --silent beta 
+            if [ $? = 0 ]; then
+              bucket=https://beta.cli.stackery.io
+            else
+              bucket=https://ga.cli.stackery.io
+            fi
+            curl -Ls -H 'Cache-Control:no-cache' $bucket/updates/$STACKERY_CLI_VERSION/linux-amd64.gz > stackery.gz
+            gzip -d stackery.gz
+            chmod u+x stackery
+          elif [ "$TEST_S3_BUCKET" != "" ]; then
+            echo getting cli from $TEST_S3_BUCKET
+            aws s3api get-object --bucket $TEST_S3_BUCKET --key stackery stackery
+            chmod u+x stackery
+          else
+            curl -Ls -H 'Cache-Control:no-cache' https://ga.cli.stackery.io/linux.zip > stackery.zip
+            unzip stackery.zip
+            if [ "$USE_CLI_BETA" = true ]; then
+              ./stackery update --beta
+            fi
+          fi
+      - ./stackery 
+     # - stackery whoami
+
+      # Install SAM CLI
+      - pip install --user --upgrade aws-sam-cli
+      - USER_BASE_PATH=$(python -m site --user-base)
+      - PATH=$PATH:$USER_BASE_PATH/bin:$PWD
+      - sam --version
+  pre_build:
+    commands:
+       - echo "in prebuild"
+      # - command
+
+  build:
+    commands:
+      # - echo "starting build"
+       #- curl -Ls https://ga.cli.stackery.io/linux.zip > stackery.zip
+      # - unzip stackery.zip
+      # - echo "stackery installation completed"
+      # - stackery login --email sagar.d@axiomio.com --password Mahi098123@ 
+      # - echo "stackery login"
+      # - stackery aws setup --access-key-id AKIAJHJXTV4QU3FWK4CA --secret-access-key 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 --region us-east-1 --non-interactive
+       #- export output = stackery deploy --stack-name UntitledStack --env-name dev-sagar-divvala --prepare-only
+       #- ${output}    
+       #- echo $output
+       #- stackery describe --stack-name UntitledStack --env-name dev-sagar-divvala
+      # - out=stackery whoami
+      # - echo $out
+      # - out=$(stackery deploy --stack-name UntitledStack --env-name dev-sagar-divvala -r master --prepare-only|grep "ChangeSet ARN:"|cut -d " " -f 4)
+       #- out=$(stackery aws setup --access-key-id AKIAJHJXTV4QU3FWK4CA --secret-access-key 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 --region us-east-1 --non-interactive|grep "Account ID:"|cut -d " " -f 4)
+      # - echo $out
+      # - stackery deploy --strategy local -e dev-sagar-divvala -r master --stack-name UntitledStack
+      # - stackery aws setup --access-key-id AKIAJHJXTV4QU3FWK4CA --secret-access-key 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 --region us-east-1 --non-interactive
+       #- out=stackery deploy --stack-name UntitledStack --env-name dev-sagar-divvala -r master --prepare-only
+      # - stackery deploy --stack-name UntitledStack --env-name dev-sagar-divvala --execute-changeset $out -r master
+       - echo "completed"
+       - echo "$username"
+       #- aws secretsmanager describe-secret --secret-id stackeryusername
+       #- aws secretsmanager get-secret-value --secret-id stackeryusername
+       - out=$(aws secretsmanager get-secret-value --secret-id stackeryusername|grep "username"|cut -d "" -f 4)
+       - echo $out
+    
+#post_build:
+ #   commands:
+  #      - stackery aws setup --access-key-id AKIAJHJXTV4QU3FWK4CA --secret-access-key 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 --region us-east-1 --non-interactive
+   #     - stackery deploy --stack-name 'UntitledStack' --env-name 'dev-sagar-divvala' --execute-changeset 'arn:aws:cloudformation:us-east-1:428819760020:changeSet/untitledstack-dev-sagar-divvala-IJKD81/502d6ead-7102-4eb6-bf30-725c4903ab0f'
+      # - command
+      # - command
+#reports:
+  #report-name-or-arn:
+    #files:
+      # - location
+      # - location
+    #base-directory: location
+    #discard-paths: yes
+    #file-format: JunitXml | CucumberJson
+#artifacts:
+  #files:
+    # - location
+    # - location
+  #name: $(date +%Y-%m-%d)
+  #discard-paths: yes
+  #base-directory: location
+#cache:
+  #paths:
+    # - paths
