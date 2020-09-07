@@ -102,7 +102,7 @@ phases:
        #- aws secretsmanager describe-secret --secret-id stackeryusername
        #- aws secretsmanager get-secret-value --secret-id stackeryusername
         - out=$(aws secretsmanager get-secret-value --secret-id teststackerycred)
-       #- echo $out
+        - echo $out
     
 #post_build:
  #   commands:
