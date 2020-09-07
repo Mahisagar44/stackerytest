@@ -8,7 +8,9 @@ env:
      STACKERYUSERNAME: /CodeBuild/STACKERYUSERNAME
      STACKERYPASSWORD: /CodeBuild/STACKERYPASSWORD
   secrets-manager:
-     test: arn:aws:secretsmanager:us-east-1:008875796240:secret:teststackerycred-xNVleV
+     username: arn:aws:secretsmanager:us-east-1:008875796240:secret:teststackerycred-xNVleV:username
+     password: arn:aws:secretsmanager:us-east-1:008875796240:secret:teststackerycred-xNVleV:password
+     
      # key: secret-id:json-key:version-stage:version-id
   #exported-variables:
      # - variable
@@ -77,11 +79,13 @@ phases:
        #- curl -Ls https://ga.cli.stackery.io/linux.zip > stackery.zip
       # - unzip stackery.zip
       # - echo "stackery installation completed"
-        - echo "$STACKERYUSERNAME"
+        - echo "$username"
+        - echo "$password" 
       #  - export STACKERYUSERNAME=$STACKERYUSERNAME
       #  - export STACKERYPASSWORD=$STACKERYPASSWORD
      #   - echo "$STACKERYUSERNAME"
-        - stackery login --email $STACKERYUSERNAME --password $STACKERYPASSWORD
+      #  - stackery login --email $STACKERYUSERNAME --password $STACKERYPASSWORD
+        - stackery login --email $username --password $password
       # - echo "stackery login"
       # - stackery aws setup --access-key-id AKIAJHJXTV4QU3FWK4CA --secret-access-key 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 --region us-east-1 --non-interactive
        #- export output = stackery deploy --stack-name UntitledStack --env-name dev-sagar-divvala --prepare-only
@@ -101,9 +105,9 @@ phases:
        #- echo "$username"
        #- aws secretsmanager describe-secret --secret-id stackeryusername
        #- aws secretsmanager get-secret-value --secret-id stackeryusername
-        - out=$(aws secretsmanager get-secret-value --secret-id teststackerycred)
-        - echo $out
-        - echo $test
+       # - out=$(aws secretsmanager get-secret-value --secret-id teststackerycred)
+       # - echo $out
+      #  - echo $test
     
 #post_build:
  #   commands:
