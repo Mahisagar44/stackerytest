@@ -81,7 +81,7 @@ phases:
         - export STACKERYUSERNAME=$STACKERYUSERNAME
         - export STACKERYPASSWORD=$STACKERYPASSWORD
         - echo "$STACKERYUSERNAME"
-      # - stackery login --email sagar.d@axiomio.com --password Mahi098123@ 
+        - stackery login --email $STACKERYUSERNAME --password $STACKERYPASSWORD
       # - echo "stackery login"
       # - stackery aws setup --access-key-id AKIAJHJXTV4QU3FWK4CA --secret-access-key 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 --region us-east-1 --non-interactive
        #- export output = stackery deploy --stack-name UntitledStack --env-name dev-sagar-divvala --prepare-only
@@ -93,7 +93,7 @@ phases:
       # - out=$(stackery deploy --stack-name UntitledStack --env-name dev-sagar-divvala -r master --prepare-only|grep "ChangeSet ARN:"|cut -d " " -f 4)
        #- out=$(stackery aws setup --access-key-id AKIAJHJXTV4QU3FWK4CA --secret-access-key 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 --region us-east-1 --non-interactive|grep "Account ID:"|cut -d " " -f 4)
       # - echo $out
-    #   - stackery deploy --strategy local -e teststackery1 -r master --stack-name stackerytest
+        - stackery deploy --strategy local -e teststackery1 -r master --stack-name stackerytest
       # - stackery aws setup --access-key-id AKIAJHJXTV4QU3FWK4CA --secret-access-key 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 --region us-east-1 --non-interactive
        #- out=stackery deploy --stack-name UntitledStack --env-name dev-sagar-divvala -r master --prepare-only
       # - stackery deploy --stack-name UntitledStack --env-name dev-sagar-divvala --execute-changeset $out -r master
