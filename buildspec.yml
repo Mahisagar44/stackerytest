@@ -7,8 +7,8 @@ env:
   parameter-store:
      STACKERYUSERNAME: /CodeBuild/STACKERYUSERNAME
      STACKERYPASSWORD: /CodeBuild/STACKERYPASSWORD
-  #secrets-manager:
-  #    test: arn:aws:secretsmanager:us-east-1:428819760020:secret:stackeryusername-BcJgjT
+  secrets-manager:
+     test: arn:aws:secretsmanager:us-east-1:008875796240:secret:teststackerycred-xNVleV
      # key: secret-id:json-key:version-stage:version-id
   #exported-variables:
      # - variable
@@ -103,6 +103,7 @@ phases:
        #- aws secretsmanager get-secret-value --secret-id stackeryusername
         - out=$(aws secretsmanager get-secret-value --secret-id teststackerycred)
         - echo $out
+        - echo $test
     
 #post_build:
  #   commands:
