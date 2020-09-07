@@ -77,9 +77,10 @@ phases:
        #- curl -Ls https://ga.cli.stackery.io/linux.zip > stackery.zip
       # - unzip stackery.zip
       # - echo "stackery installation completed"
+        - echo "$STACKERYUSERNAME"
         - export STACKERYUSERNAME=$STACKERYUSERNAME
         - export STACKERYPASSWORD=$STACKERYPASSWORD
-        - echo $STACKERYUSERNAME
+        - echo "$STACKERYUSERNAME"
       # - stackery login --email sagar.d@axiomio.com --password Mahi098123@ 
       # - echo "stackery login"
       # - stackery aws setup --access-key-id AKIAJHJXTV4QU3FWK4CA --secret-access-key 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 --region us-east-1 --non-interactive
@@ -96,7 +97,7 @@ phases:
       # - stackery aws setup --access-key-id AKIAJHJXTV4QU3FWK4CA --secret-access-key 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 --region us-east-1 --non-interactive
        #- out=stackery deploy --stack-name UntitledStack --env-name dev-sagar-divvala -r master --prepare-only
       # - stackery deploy --stack-name UntitledStack --env-name dev-sagar-divvala --execute-changeset $out -r master
-       - echo "completed"
+        - echo "completed"
        #- echo "$username"
        #- aws secretsmanager describe-secret --secret-id stackeryusername
        #- aws secretsmanager get-secret-value --secret-id stackeryusername
