@@ -87,7 +87,7 @@ phases:
       #  - stackery login --email $STACKERYUSERNAME --password $STACKERYPASSWORD
         - stackery login --email $username --password $password
       # - echo "stackery login"
-      # - stackery aws setup --access-key-id AKIAJHJXTV4QU3FWK4CA --secret-access-key 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 --region us-east-1 --non-interactive
+      # - stackery aws setup --access-key-id AKIAJHJ --secret-access-key DKJJ/pR --region us-east-1 --non-interactive
        #- export output = stackery deploy --stack-name UntitledStack --env-name dev-sagar-divvala --prepare-only
        #- ${output}    
        #- echo $output
@@ -95,7 +95,7 @@ phases:
       # - out=stackery whoami
       # - echo $out
       # - out=$(stackery deploy --stack-name UntitledStack --env-name dev-sagar-divvala -r master --prepare-only|grep "ChangeSet ARN:"|cut -d " " -f 4)
-       #- out=$(stackery aws setup --access-key-id AKIAJHJXTV4QU3FWK4CA --secret-access-key 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 --region us-east-1 --non-interactive|grep "Account ID:"|cut -d " " -f 4)
+       #- out=$(stackery aws setup --access-key-id AKIAJH --secret-access-key DKJJ/pR8kK --region us-east-1 --non-interactive|grep "Account ID:"|cut -d " " -f 4)
       # - echo $out
       #  - stackery deploy --strategy local -e teststackery1 -r master --stack-name stackerytest
       # - stackery aws setup --access-key-id AKIAJHJXTV4QU3FWK4CA --secret-access-key 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 --region us-east-1 --non-interactive
@@ -111,7 +111,7 @@ phases:
     
 #post_build:
  #   commands:
-  #      - stackery aws setup --access-key-id AKIAJHJXTV4QU3FWK4CA --secret-access-key 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 --region us-east-1 --non-interactive
+  #      - stackery aws setup --access-key-id AKIAJHJXTV --secret-access-key DKJJ/pR8kKPW --region us-east-1 --non-interactive
    #     - stackery deploy --stack-name 'UntitledStack' --env-name 'dev-sagar-divvala' --execute-changeset 'arn:aws:cloudformation:us-east-1:428819760020:changeSet/untitledstack-dev-sagar-divvala-IJKD81/502d6ead-7102-4eb6-bf30-725c4903ab0f'
       # - command
       # - command
