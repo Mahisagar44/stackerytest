@@ -68,6 +68,7 @@ phases:
       - USER_BASE_PATH=$(python -m site --user-base)
       - PATH=$PATH:$USER_BASE_PATH/bin:$PWD
       - sam --version
+      - aws cloudformation package --template-file template.yaml --s3-bucket teststackery --output-template-file outputteststackery.yaml
   pre_build:
     commands:
        - echo "in prebuild"
@@ -88,7 +89,7 @@ phases:
         - stackery login --email $username --password $password
       # - echo "stackery login"
       # - stackery aws setup --access-key-id AKIAJHJ --secret-access-key DKJJ/pR --region us-east-1 --non-interactive
-       #- export output = stackery deploy --stack-name UntitledStack --env-name dev-sagar-divvala --prepare-only
+        - stackery deploy --stack-name stackerytest --env-name teststackery1 -r master --prepare-only
        #- ${output}    
        #- echo $output
        #- stackery describe --stack-name UntitledStack --env-name dev-sagar-divvala
@@ -123,10 +124,11 @@ phases:
     #base-directory: location
     #discard-paths: yes
     #file-format: JunitXml | CucumberJson
-#artifacts:
-  #files:
-    # - location
-    # - location
+artifacts:
+  type: zip 
+  files:
+     - template.yaml
+     - outputteststackery.yaml
   #name: $(date +%Y-%m-%d)
   #discard-paths: yes
   #base-directory: location
