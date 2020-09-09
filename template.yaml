@@ -17,17 +17,17 @@ Resources:
               x-amazon-apigateway-integration:
                 httpMethod: POST
                 type: aws_proxy
-                uri: !Sub arn:${AWS::Partition}:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${Testgitfunction0.Arn}/invocations
+                uri: !Sub arn:${AWS::Partition}:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${Testgitfunction1.Arn}/invocations
               responses: {}
       EndpointConfiguration: REGIONAL
       TracingEnabled: true
-  Testgitfunction0:
+  Testgitfunction1:
     Type: AWS::Serverless::Function
     Properties:
-      FunctionName: !Sub ${AWS::StackName}-Testgitfunction0
+      FunctionName: !Sub ${AWS::StackName}-Testgitfunction1
       Description: !Sub
         - Stack ${StackTagName} Environment ${EnvironmentTagName} Function ${ResourceName}
-        - ResourceName: Testgitfunction0
+        - ResourceName: Testgitfunction1
       CodeUri: src/Function
       Handler: index.handler
       Runtime: nodejs12.x
@@ -47,12 +47,9 @@ Parameters:
   StackTagName:
     Type: String
     Description: Stack Name (injected by Stackery at deployment time)
- #   Default: stackerytest    
   EnvironmentTagName:
     Type: String
     Description: Environment Name (injected by Stackery at deployment time)
-#    Default: teststackery1
   EnvironmentAPIGatewayStageName:
     Type: String
     Description: Environment name used for API Gateway Stage names (injected by Stackery at deployment time)
- #   Default: teststackery1
