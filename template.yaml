@@ -47,12 +47,12 @@ Parameters:
   StackTagName:
     Type: String
     Description: Stack Name (injected by Stackery at deployment time)
-    Default: stackerytest    
+ #   Default: stackerytest    
   EnvironmentTagName:
     Type: String
     Description: Environment Name (injected by Stackery at deployment time)
-    Default: teststackery1
+#    Default: teststackery1
   EnvironmentAPIGatewayStageName:
     Type: String
     Description: Environment name used for API Gateway Stage names (injected by Stackery at deployment time)
-    Default: teststackery1
+ #   Default: teststackery1
