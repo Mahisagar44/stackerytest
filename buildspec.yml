@@ -89,7 +89,7 @@ phases:
         - stackery login --email $username --password $password
       # - echo "stackery login"
       # - stackery aws setup --access-key-id AKIAJHJ --secret-access-key DKJJ/pR --region us-east-1 --non-interactive
-        - stackery deploy --stack-name stackerytest --env-name teststackery1 -r master --prepare-only
+       # - stackery deploy --stack-name stackerytest --env-name teststackery1 -r master --prepare-only
        #- ${output}    
        #- echo $output
        #- stackery describe --stack-name UntitledStack --env-name dev-sagar-divvala
