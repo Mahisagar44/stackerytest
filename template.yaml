@@ -17,17 +17,17 @@ Resources:
               x-amazon-apigateway-integration:
                 httpMethod: POST
                 type: aws_proxy
-                uri: !Sub arn:${AWS::Partition}:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${Testgitfunction1.Arn}/invocations
+                uri: !Sub arn:${AWS::Partition}:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${Testgitfunction0.Arn}/invocations
               responses: {}
       EndpointConfiguration: REGIONAL
       TracingEnabled: true
-  Testgitfunction1:
+  Testgitfunction0:
     Type: AWS::Serverless::Function
     Properties:
-      FunctionName: !Sub ${AWS::StackName}-Testgitfunction1
+      FunctionName: !Sub ${AWS::StackName}-Testgitfunction0
       Description: !Sub
         - Stack ${StackTagName} Environment ${EnvironmentTagName} Function ${ResourceName}
-        - ResourceName: Testgitfunction1
+        - ResourceName: Testgitfunction0
       CodeUri: src/Function
       Handler: index.handler
       Runtime: nodejs12.x
